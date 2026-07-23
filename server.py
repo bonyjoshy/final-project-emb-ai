@@ -10,10 +10,14 @@ def emotion_detector_server():
     key, value = response.popitem()
     last_emotion = {key: value}
 
+    if label_dominant_emotion is None:
+        return "Invalid text! Please try again!."
+
     return f"For the given statement, the system response is \
     {str(response).replace('{', '').replace('}', '')} and \
     {str(last_emotion).replace('{', '').replace('}', '')}. \
     The dominant emotion is {label_dominant_emotion}."
+
 @app.route("/")
 def render_index_page():
     return render_template("index.html")
